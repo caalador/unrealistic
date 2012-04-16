@@ -8,6 +8,8 @@ import org.percepta.mgrankvi.unrealistic.client.ui.data.LimitChange;
 
 public class ConductorCell {
 
+	private long id;
+
 	private final String image;
 	private final int width, height, columns, rows;
 	private int delay = 0;
@@ -31,6 +33,14 @@ public class ConductorCell {
 		this.height = height;
 		this.columns = columns;
 		this.rows = rows;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(final long id) {
+		this.id = id;
 	}
 
 	/**

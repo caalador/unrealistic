@@ -61,12 +61,17 @@ public class VUnrealisticCell {
 		style.setPropertyPx("width", width);
 		style.setPropertyPx("height", height);
 		style.setProperty("position", "absolute");
-		style.setProperty("background-attachment", "fixed");
 		style.setVisibility(Visibility.HIDDEN);
 
 		style.setBackgroundImage("url(" + Window.Location.getPath() + "/VAADIN/themes/" + image + ")");
-		style.setProperty("background-position", "0 0");
+		// style.setProperty("background-position", "0 0");
+		setBGPosition(style, "0 0");
 	}
+
+	// Work around for GWT dev mode problem with setting property containing -
+	static native void setBGPosition(Style style, String position) /*-{
+																	style["background-position"] = position;
+																	}-*/;
 
 	public void setPath(final String path) {
 		VConsole.log("url(" + Window.Location.getHost() + path + " / VAADIN / themes / " + image + ")");
@@ -261,9 +266,9 @@ public class VUnrealisticCell {
 				column = loopStartColumn;
 			}
 		}
-		getStyle().setProperty("background-position", "-" + column * width + "px -" + row * height + "px");
-		VConsole.log("Set position: -" + column * width + "px -" + row * height + "px");
-		VConsole.log(getStyle().getProperty("background-position"));
+		// getStyle().setProperty("background-position", "-" + column * width +
+		// "px -" + row * height + "px");
+		setBGPosition(getStyle(), "-" + column * width + "px -" + row * height + "px");
 	}
 
 	private void frameBack() {
@@ -286,7 +291,9 @@ public class VUnrealisticCell {
 				parent.stopAnimation(this);
 			}
 		}
-		getStyle().setProperty("background-position", "-" + column * width + "px -" + row * height + "px");
+		// getStyle().setProperty("background-position", "-" + column * width +
+		// "px -" + row * height + "px");
+		setBGPosition(getStyle(), "-" + column * width + "px -" + row * height + "px");
 	}
 
 	public void setParent(final VUnrealistic parent) {
