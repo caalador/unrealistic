@@ -6,30 +6,34 @@ import org.percepta.mgrankvi.unrealistic.client.ui.data.LimitChange;
 
 import com.example.unrealistic.demos.CFDemo;
 import com.example.unrealistic.demos.TimedCircleAndFlame;
-import com.vaadin.Application;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
+import com.vaadin.terminal.WrappedRequest;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.NativeSelect;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
+import com.vaadin.ui.Root;
 
-public class UnrealisticApplication extends Application {
+public class UnrealisticApplication extends Root {
 
 	private static final long serialVersionUID = 3694512868981467643L;
 
-	private Window mainWindow;
 	private final HorizontalLayout contentLayout = new HorizontalLayout();
 
 	@Override
-	public void init() {
-		mainWindow = new Window("Unrealistic Application");
-		((VerticalLayout) mainWindow.getContent()).setSpacing(true);
-		setMainWindow(mainWindow);
-
+	protected void init(final WrappedRequest request) {
+		setCaption("Unrealistic Application");
+		// createControllLayout();
 		selectLayout();
 
-		mainWindow.addComponent(contentLayout);
+		addComponent(contentLayout);
+		final ConductorCell cell = new ConductorCell("demo/images/Vroom.png", 100, 50, 14, 2);
+		cell.setLoopStartColumn(10);
+		cell.setLoopStartRow(2);
+		final UnrealisticComponent component = createAndAddComponent(150, 150);
+		component.setFps(10);
+		component.setPlayHeight(0);
+		component.addImage(cell);
+		contentLayout.addComponent(component);
 	}
 
 	private void selectLayout() {
@@ -47,6 +51,7 @@ public class UnrealisticApplication extends Application {
 		select.addListener(new ValueChangeListener() {
 			private static final long serialVersionUID = -838069154357449340L;
 
+			@Override
 			public void valueChange(final ValueChangeEvent event) {
 				contentLayout.removeAllComponents();
 				final String selection = (String) event.getProperty().getValue();
@@ -100,7 +105,7 @@ public class UnrealisticApplication extends Application {
 				}
 			}
 		});
-		mainWindow.addComponent(select);
+		addComponent(select);
 	}
 
 	private UnrealisticComponent createAndAddComponent(final int width, final int height) {
@@ -112,5 +117,4 @@ public class UnrealisticApplication extends Application {
 		contentLayout.addComponent(component);
 		return component;
 	}
-
 }

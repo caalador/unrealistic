@@ -13,7 +13,7 @@
 		<init-param>
 			<description>
 			Vaadin application class to start</description>
-			<param-name>application</param-name>
+			<param-name>root</param-name>
 			<param-value>com.example.unrealistic.UnrealisticApplication</param-value>
 		</init-param>
 		<init-param>
