@@ -6,26 +6,31 @@ import org.percepta.mgrankvi.unrealistic.client.ui.data.LimitChange;
 
 import com.example.unrealistic.demos.CFDemo;
 import com.example.unrealistic.demos.TimedCircleAndFlame;
+import com.vaadin.annotations.Theme;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
-import com.vaadin.terminal.WrappedRequest;
+import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.NativeSelect;
-import com.vaadin.ui.Root;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
 
-public class UnrealisticApplication extends Root {
+@Theme("demo")
+public class UnrealisticApplication extends UI {
 
 	private static final long serialVersionUID = 3694512868981467643L;
 
+	private final VerticalLayout content = new VerticalLayout();
 	private final HorizontalLayout contentLayout = new HorizontalLayout();
 
 	@Override
-	protected void init(final WrappedRequest request) {
-		setCaption("Unrealistic Application");
+	protected void init(final VaadinRequest request) {
+		getPage().setTitle("Unrealistic Application");
+		setContent(content);
 		// createControllLayout();
 		selectLayout();
 
-		addComponent(contentLayout);
+		content.addComponent(contentLayout);
 		final ConductorCell cell = new ConductorCell("demo/images/Vroom.png", 100, 50, 14, 2);
 		cell.setLoopStartColumn(10);
 		cell.setLoopStartRow(2);
@@ -48,7 +53,7 @@ public class UnrealisticApplication extends Root {
 		select.addItem("Circle flame timing");
 		select.addItem("Demo...");
 		select.setImmediate(true);
-		select.addListener(new ValueChangeListener() {
+		select.addValueChangeListener(new ValueChangeListener() {
 			private static final long serialVersionUID = -838069154357449340L;
 
 			@Override
@@ -105,7 +110,7 @@ public class UnrealisticApplication extends Root {
 				}
 			}
 		});
-		addComponent(select);
+		content.addComponent(select);
 	}
 
 	private UnrealisticComponent createAndAddComponent(final int width, final int height) {
