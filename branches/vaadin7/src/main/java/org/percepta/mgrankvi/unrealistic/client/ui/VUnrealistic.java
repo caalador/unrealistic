@@ -11,7 +11,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.VConsole;
 
@@ -86,7 +85,7 @@ public class VUnrealistic extends Widget implements ClickHandler {
 	}
 
 	protected void setPlayImage(final String image) {
-		play.getStyle().setBackgroundImage("url(" + Window.Location.getPath() + "/VAADIN/themes/" + image + ")");
+		play.getStyle().setBackgroundImage("url(/VAADIN/themes/" + image + ")");
 	}
 
 	protected void setPlayPosition(final int left, final int top) {

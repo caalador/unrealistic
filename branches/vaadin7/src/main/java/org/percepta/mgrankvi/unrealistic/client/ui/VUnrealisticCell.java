@@ -12,7 +12,6 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.vaadin.client.VConsole;
 
 public class VUnrealisticCell {
@@ -63,8 +62,7 @@ public class VUnrealisticCell {
 		style.setProperty("position", "absolute");
 		style.setVisibility(Visibility.HIDDEN);
 
-		style.setBackgroundImage("url(" + Window.Location.getPath() + "/VAADIN/themes/" + image + ")");
-		// style.setProperty("background-position", "0 0");
+		style.setBackgroundImage("url(/VAADIN/themes/" + image + ")");
 		setBGPosition(style, "0 0");
 	}
 
@@ -72,11 +70,6 @@ public class VUnrealisticCell {
 	static native void setBGPosition(Style style, String position) /*-{
 																	style["background-position"] = position;
 																	}-*/;
-
-	public void setPath(final String path) {
-		VConsole.log("url(" + Window.Location.getHost() + path + " / VAADIN / themes / " + image + ")");
-		getStyle().setBackgroundImage("url(" + path + "/VAADIN/themes/" + image + ")");
-	}
 
 	public void setDelay(final int delay) {
 		this.delay = delay;
