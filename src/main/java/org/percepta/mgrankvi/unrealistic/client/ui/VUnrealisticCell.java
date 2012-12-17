@@ -62,9 +62,18 @@ public class VUnrealisticCell {
 		style.setProperty("position", "absolute");
 		style.setVisibility(Visibility.HIDDEN);
 
-		style.setBackgroundImage("url(/VAADIN/themes/" + image + ")");
+		style.setBackgroundImage("url(" + VUnrealistic.getUrlBegining() + "VAADIN/themes/" + image + ")");
 		setBGPosition(style, "0 0");
 	}
+
+	// private String getUrlBegining() {
+	// String urlStart = Window.Location.getPath();
+	// if ("/".equals(urlStart)) {
+	// urlStart = "http://" + Window.Location.getHost() + "/";
+	// }
+	// VConsole.log(" - url[" + urlStart + "]");
+	// return urlStart;
+	// }
 
 	// Work around for GWT dev mode problem with setting property containing -
 	static native void setBGPosition(Style style, String position) /*-{
