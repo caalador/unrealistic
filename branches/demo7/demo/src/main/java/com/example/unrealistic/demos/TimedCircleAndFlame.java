@@ -8,6 +8,9 @@ public class TimedCircleAndFlame extends UnrealisticComponent {
 	private static final long serialVersionUID = -3698813263032202763L;
 
 	public TimedCircleAndFlame() {
+	}
+
+	public void init() {
 		setWidth("150px");
 		setHeight("150px");
 		setFps(15);
