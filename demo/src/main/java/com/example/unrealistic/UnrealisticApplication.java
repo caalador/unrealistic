@@ -104,9 +104,13 @@ public class UnrealisticApplication extends UI {
 					final UnrealisticComponent component = createAndAddComponent(150, 150);
 					component.addImage(cell);
 				} else if ("Circle flame timing".equals(selection)) {
-					contentLayout.addComponent(new TimedCircleAndFlame());
+					final TimedCircleAndFlame circleAndFlame = new TimedCircleAndFlame();
+					circleAndFlame.init();
+					contentLayout.addComponent(circleAndFlame);
 				} else if ("Demo...".equals(selection)) {
-					contentLayout.addComponent(new CFDemo());
+					final CFDemo demo = new CFDemo();
+					demo.init();
+					contentLayout.addComponent(demo);
 				}
 			}
 		});

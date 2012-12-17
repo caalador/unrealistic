@@ -17,6 +17,9 @@ public class CFDemo extends UnrealisticComponent {
 	private static final int HEIGHT = 300;
 
 	public CFDemo() {
+	}
+
+	public void init() {
 		setWidth(WIDTH + "px");
 		setHeight(HEIGHT + "px");
 		setFps(20);
