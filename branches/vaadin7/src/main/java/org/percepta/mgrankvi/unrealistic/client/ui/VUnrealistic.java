@@ -11,6 +11,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.VConsole;
 
@@ -70,6 +71,7 @@ public class VUnrealistic extends Widget implements ClickHandler {
 		if (pollerSuspendedDueDetach) {
 			poller.scheduleRepeating(interval);
 		}
+
 	}
 
 	@Override
@@ -79,13 +81,23 @@ public class VUnrealistic extends Widget implements ClickHandler {
 		pollerSuspendedDueDetach = true;
 	}
 
+	protected static String getUrlBegining() {
+		String urlStart = Window.Location.getPath();
+		if ("/".equals(urlStart)) {
+			urlStart = "http://" + Window.Location.getHost() + "/";
+		}
+		VConsole.log(" - " + "url(" + urlStart + "VAADIN/themes/[image])");
+		return urlStart;
+	}
+
 	protected void setPlaySize(final int width, final int height) {
 		play.getStyle().setPropertyPx("width", width);
 		play.getStyle().setPropertyPx("height", height);
 	}
 
 	protected void setPlayImage(final String image) {
-		play.getStyle().setBackgroundImage("url(/VAADIN/themes/" + image + ")");
+		final String urlStart = getUrlBegining();
+		play.getStyle().setBackgroundImage("url(" + urlStart + "VAADIN/themes/" + image + ")");
 	}
 
 	protected void setPlayPosition(final int left, final int top) {
