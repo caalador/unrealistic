@@ -48,6 +48,7 @@ public class UnrealisticApplication extends UI {
 		select.addItem("Long Flame");
 		select.addItem("Long Flame reverse");
 		select.addItem("Long Flame loop position set");
+		select.addItem("Dripp");
 		select.addItem("Circle");
 		select.addItem("Circle with fade");
 		select.addItem("Circle flame timing");
@@ -86,6 +87,9 @@ public class UnrealisticApplication extends UI {
 					final UnrealisticComponent component = createAndAddComponent(150, 150);
 					component.setFps(10);
 					component.addImage(cell);
+				} else if ("Dripp".equals(selection)) {
+					final UnrealisticComponent component = createAndAddComponent(150, 250);
+					component.addImage(dripp());
 				} else if ("Circle".equals(selection)) {
 					final ConductorCell cell = new ConductorCell("demo/images/CircleSprites.png", 90, 90, 29, 5);
 					cell.setLoop(false);
@@ -125,5 +129,35 @@ public class UnrealisticApplication extends UI {
 
 		contentLayout.addComponent(component);
 		return component;
+	}
+
+	private ConductorCell dripp() {
+		final ConductorCell cell = new ConductorCell("demo/images/Dripp.png", 50, 250, 17, 2);
+		cell.setOffsetX(100);
+		cell.setFrameDelay(1);
+		cell.setLoopStartColumn(7);
+		cell.setLoopStartRow(2);
+		cell.setEnd(13, 2);
+
+		// LimitChange limit = new LimitChange(46);
+		// limit.setLoopStartColumn(14);
+		// limit.setLoopStartRow(2);
+		// cell.addLimit(limit);
+
+		// LimitChange limit = new LimitChange(50);
+		// limit.setLoopStartColumn(14);
+		// limit.setLoopStartRow(2);
+		// cell.addLimit(limit);
+
+		LimitChange limit = new LimitChange(50);
+		limit.setLoopStartColumn(14);
+		limit.setEndColumn(17);
+		cell.addLimit(limit);
+
+		limit = new LimitChange(70);
+		limit.setLoop(false);
+		cell.addLimit(limit);
+
+		return cell;
 	}
 }
